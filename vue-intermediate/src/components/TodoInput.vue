@@ -4,19 +4,38 @@
     <span class="addContainer" v-on:click="addTodo">
       <i class="fas fa-plus addBtn" />
     </span>
+
+    <app-modal v-if="showModal" @close="showModal = false">
+      <template #header>
+        <h3>
+          경고!
+          <i class="closeModalBtn fas fa-times" @click="showModal = false" />
+        </h3>
+      </template>
+
+      <template #body>
+        <p>아무것도 입력하지 않으셨습니다.</p>
+      </template>
+    </app-modal>
   </div>
 </template>
 
 <script>
+import AppModal from "./shared/AppModal.vue";
+
 export default {
   data: () => {
     return {
       newTodoItem: "",
+      showModal: false,
     };
   },
   methods: {
     addTodo: function () {
-      if (this.newTodoItem === "") return;
+      if (this.newTodoItem === "") {
+        this.showModal = true;
+        return;
+      }
       // 저장 이벤트 발생
       this.$emit("addTodoItem", this.newTodoItem);
       // 초기화
@@ -25,6 +44,9 @@ export default {
     clearInput: function () {
       this.newTodoItem = "";
     },
+  },
+  components: {
+    AppModal: AppModal,
   },
 };
 </script>
@@ -53,5 +75,9 @@ input:focus {
 .addBtn {
   color: white;
   vertical-align: middle;
+}
+
+.closeModalBtn {
+  color: #42b983;
 }
 </style>
