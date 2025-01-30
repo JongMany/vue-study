@@ -37,7 +37,8 @@ export default {
         return;
       }
       // 저장 이벤트 발생
-      this.$emit("addTodoItem", this.newTodoItem);
+      const text = this.newTodoItem.trim();
+      this.$store.commit("addTodoItem", text);
       // 초기화
       this.clearInput();
     },

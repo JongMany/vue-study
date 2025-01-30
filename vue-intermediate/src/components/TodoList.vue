@@ -23,13 +23,12 @@
 
 <script>
 export default {
-  props: ["todoItems"],
   methods: {
     removeTodo(id) {
-      this.$emit("removeTodoItem", id);
+      this.$store.commit("removeItemById", id);
     },
     toggleComplete(index) {
-      this.$emit("toggleTodoItem", index);
+      this.$store.commit("toggleItemCompleted", index);
     },
   },
 };
