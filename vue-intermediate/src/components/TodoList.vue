@@ -1,7 +1,14 @@
 <template>
   <ul>
     <li v-for="todoItem in todoItems" v-bind:key="todoItem" class="shadow">
-      {{ todoItem.value }}
+      <i
+        class="checkBtn fas fa-check"
+        v-bind:class="{ checkBtnCompleted: todoItem.completed }"
+        @click="toggleComplete(todoItem.id)"
+      />
+      <span v-bind:class="{ textCompleted: todoItem.completed }">{{
+        todoItem.value
+      }}</span>
       <span class="removeBtn" @click="removeTodoItem(todoItem.id)">
         <i class="fas fa-trash-alt" />
       </span>
@@ -25,6 +32,17 @@ export default {
   methods: {
     removeTodoItem(id) {
       this.todoItems = this.todoItems.filter((item) => item.id !== id);
+      localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
+    },
+    toggleComplete(id) {
+      this.todoItems = this.todoItems.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              completed: !item.completed,
+            }
+          : item
+      );
       localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
     },
   },

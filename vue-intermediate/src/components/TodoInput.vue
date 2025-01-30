@@ -18,7 +18,7 @@ export default {
     addTodo: function () {
       // 저장 로직
       const todos = JSON.parse(localStorage.getItem("newTodoItem")) ?? [];
-      todos.push({ id: Date.now(), value: this.newTodoItem });
+      todos.push({ id: Date.now(), value: this.newTodoItem, completed: false });
       localStorage.setItem("newTodoItem", JSON.stringify(todos));
 
       // 초기화
