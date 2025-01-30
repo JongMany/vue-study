@@ -18,33 +18,23 @@
 
 <script>
 export default {
-  data() {
-    return {
-      todoItems: [],
-    };
-  },
-  //create -> mount -> update -> destroy
-  created() {
-    // local storage로부터 데이터를 가져온다.
-    const items = localStorage.getItem("newTodoItem");
-    this.todoItems = JSON.parse(items) || [];
-  },
+  props: ["todoItems"],
   methods: {
-    removeTodoItem(id) {
-      this.todoItems = this.todoItems.filter((item) => item.id !== id);
-      localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
-    },
-    toggleComplete(id) {
-      this.todoItems = this.todoItems.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              completed: !item.completed,
-            }
-          : item
-      );
-      localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
-    },
+    // removeTodoItem(id) {
+    //   this.todoItems = this.todoItems.filter((item) => item.id !== id);
+    //   localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
+    // },
+    // toggleComplete(id) {
+    //   this.todoItems = this.todoItems.map((item) =>
+    //     item.id === id
+    //       ? {
+    //           ...item,
+    //           completed: !item.completed,
+    //         }
+    //       : item
+    //   );
+    //   localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
+    // },
   },
 };
 </script>

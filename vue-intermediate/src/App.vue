@@ -1,8 +1,8 @@
 <template>
   <div id="id">
     <todo-header />
-    <todo-input />
-    <todo-list />
+    <todo-input v-on:addTodoItem="addTodoState" />
+    <todo-list v-bind:todoItems="todoItems" />
     <todo-footer />
   </div>
 </template>
@@ -19,6 +19,29 @@ export default {
     TodoInput,
     TodoList,
     TodoFooter,
+  },
+  data() {
+    return {
+      todoItems: [],
+    };
+  },
+  created() {
+    // local storage로부터 데이터를 가져온다.
+    const items = localStorage.getItem("newTodoItem");
+    this.todoItems = JSON.parse(items) || [];
+  },
+  methods: {
+    addTodoState: function (todoValue) {
+      // 저장 로직
+      const todos = JSON.parse(localStorage.getItem("newTodoItem")) ?? [];
+      todos.push({ id: Date.now(), value: todoValue, completed: false });
+
+      // 상태 변경
+      this.todoItems = todos;
+
+      // 전역 상태 변경
+      localStorage.setItem("newTodoItem", JSON.stringify(todos));
+    },
   },
 };
 </script>
