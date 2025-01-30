@@ -1,10 +1,14 @@
 <template>
   <ul>
-    <li v-for="todoItem in todoItems" v-bind:key="todoItem" class="shadow">
+    <li
+      v-for="(todoItem, index) in todoItems"
+      v-bind:key="todoItem"
+      class="shadow"
+    >
       <i
         class="checkBtn fas fa-check"
         v-bind:class="{ checkBtnCompleted: todoItem.completed }"
-        @click="toggleComplete(todoItem.id)"
+        @click="toggleComplete(index)"
       />
       <span v-bind:class="{ textCompleted: todoItem.completed }">{{
         todoItem.value
@@ -23,8 +27,8 @@ export default {
     removeTodo(id) {
       this.$emit("removeTodoItem", id);
     },
-    toggleComplete(id) {
-      this.$emit("toggleTodoItem", id);
+    toggleComplete(index) {
+      this.$emit("toggleTodoItem", index);
     },
   },
 };

@@ -53,15 +53,8 @@ export default {
       // 전역 상태 변경
       localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
     },
-    toggleCompleteState(id) {
-      this.todoItems = this.todoItems.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              completed: !item.completed,
-            }
-          : item
-      );
+    toggleCompleteState(index) {
+      this.todoItems[index].completed = !this.todoItems[index].completed;
       localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
     },
   },
