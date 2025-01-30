@@ -2,7 +2,11 @@
   <div id="id">
     <todo-header />
     <todo-input v-on:addTodoItem="addTodoState" />
-    <todo-list v-bind:todoItems="todoItems" />
+    <todo-list
+      v-bind:todoItems="todoItems"
+      v-on:removeTodoItem="removeTodoState"
+      v-on:toggleTodoItem="toggleCompleteState"
+    />
     <todo-footer />
   </div>
 </template>
@@ -41,6 +45,24 @@ export default {
 
       // 전역 상태 변경
       localStorage.setItem("newTodoItem", JSON.stringify(todos));
+    },
+    removeTodoState(id) {
+      // 상태 변경
+      this.todoItems = this.todoItems.filter((item) => item.id !== id);
+
+      // 전역 상태 변경
+      localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
+    },
+    toggleCompleteState(id) {
+      this.todoItems = this.todoItems.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              completed: !item.completed,
+            }
+          : item
+      );
+      localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
     },
   },
 };

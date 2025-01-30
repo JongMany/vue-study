@@ -9,7 +9,7 @@
       <span v-bind:class="{ textCompleted: todoItem.completed }">{{
         todoItem.value
       }}</span>
-      <span class="removeBtn" @click="removeTodoItem(todoItem.id)">
+      <span class="removeBtn" @click="removeTodo(todoItem.id)">
         <i class="fas fa-trash-alt" />
       </span>
     </li>
@@ -20,21 +20,12 @@
 export default {
   props: ["todoItems"],
   methods: {
-    // removeTodoItem(id) {
-    //   this.todoItems = this.todoItems.filter((item) => item.id !== id);
-    //   localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
-    // },
-    // toggleComplete(id) {
-    //   this.todoItems = this.todoItems.map((item) =>
-    //     item.id === id
-    //       ? {
-    //           ...item,
-    //           completed: !item.completed,
-    //         }
-    //       : item
-    //   );
-    //   localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
-    // },
+    removeTodo(id) {
+      this.$emit("removeTodoItem", id);
+    },
+    toggleComplete(id) {
+      this.$emit("toggleTodoItem", id);
+    },
   },
 };
 </script>
