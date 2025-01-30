@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { store } from "./store/store.js";
 import TodoHeader from "./components/TodoHeader.vue";
 import TodoInput from "./components/TodoInput.vue";
 import TodoList from "./components/TodoList.vue";
@@ -65,6 +66,7 @@ export default {
       localStorage.removeItem("newTodoItem");
     },
   },
+  store,
 };
 </script>
 
