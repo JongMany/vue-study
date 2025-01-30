@@ -36,15 +36,18 @@ export default {
   },
   methods: {
     addTodoState: function (todoValue) {
-      // 저장 로직
-      const todos = JSON.parse(localStorage.getItem("newTodoItem")) ?? [];
-      todos.push({ id: Date.now(), value: todoValue, completed: false });
-
       // 상태 변경
-      this.todoItems = todos;
+      this.todoItems = [
+        ...this.todoItems,
+        {
+          id: Date.now(),
+          value: todoValue,
+          completed: false,
+        },
+      ];
 
       // 전역 상태 변경
-      localStorage.setItem("newTodoItem", JSON.stringify(todos));
+      localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
     },
     removeTodoState(id) {
       // 상태 변경

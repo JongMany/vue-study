@@ -1,5 +1,6 @@
 <template>
-  <ul>
+  <!-- Transition을 위한 태그 name은 css class prefix -->
+  <transition-group name="list" tag="ul">
     <li
       v-for="(todoItem, index) in todoItems"
       v-bind:key="todoItem"
@@ -17,7 +18,7 @@
         <i class="fas fa-trash-alt" />
       </span>
     </li>
-  </ul>
+  </transition-group>
 </template>
 
 <script>
@@ -69,12 +70,24 @@ li {
 }
 
 /* transition css */
+/* 1. declare transition */
+.list-move,
 .list-enter-active,
 .list-leave-active {
-  transition: all 1s;
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+
+/* 2. declare enter from and leave to state */
+.list-enter-from,
+.list-leave-to {
   opacity: 0;
   transform: translateY(30px);
+}
+
+/* 3. ensure leaving items are taken out of layout flow so that moving
+      animations can be calculated correctly. */
+.list-leave-active {
+  /* position: absolute; */
+  transition: all 1s;
 }
 </style>
