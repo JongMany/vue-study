@@ -2,7 +2,7 @@
   <!-- Transition을 위한 태그 name은 css class prefix -->
   <transition-group name="list" tag="ul">
     <li
-      v-for="(todoItem, index) in this.$store.state.todoItems"
+      v-for="(todoItem, index) in this.todoItems"
       v-bind:key="todoItem"
       class="shadow"
     >
@@ -22,13 +22,20 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
+
 export default {
+  computed: {
+    // ...mapGetters({ todoItems: "storedTodoItems" }),
+    ...mapState(["todoItems"]),
+  },
   methods: {
+    ...mapMutations(["removeItemById", "toggleItemCompleted"]),
     removeTodo(id) {
-      this.$store.commit("removeItemById", id);
+      this.removeItemById(id);
     },
     toggleComplete(index) {
-      this.$store.commit("toggleItemCompleted", index);
+      this.toggleItemCompleted(index);
     },
   },
 };
