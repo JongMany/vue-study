@@ -8,7 +8,7 @@
 export default {
   methods: {
     clearTodo() {
-      localStorage.removeItem("newTodoItem");
+      this.$emit("clearTodoItem");
     },
   },
 };

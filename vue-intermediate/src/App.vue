@@ -7,7 +7,7 @@
       v-on:removeTodoItem="removeTodoState"
       v-on:toggleTodoItem="toggleCompleteState"
     />
-    <todo-footer />
+    <todo-footer v-on:clearTodoItem="clearTodoState" />
   </div>
 </template>
 
@@ -56,6 +56,10 @@ export default {
     toggleCompleteState(index) {
       this.todoItems[index].completed = !this.todoItems[index].completed;
       localStorage.setItem("newTodoItem", JSON.stringify(this.todoItems));
+    },
+    clearTodoState() {
+      this.todoItems = [];
+      localStorage.removeItem("newTodoItem");
     },
   },
 };
