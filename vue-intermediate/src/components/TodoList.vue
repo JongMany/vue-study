@@ -2,7 +2,7 @@
   <!-- Transition을 위한 태그 name은 css class prefix -->
   <transition-group name="list" tag="ul">
     <li
-      v-for="(todoItem, index) in todoItems"
+      v-for="(todoItem, index) in this.$store.state.todoItems"
       v-bind:key="todoItem"
       class="shadow"
     >

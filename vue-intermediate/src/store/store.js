@@ -1,3 +1,14 @@
 import Vuex from "vuex";
 
-export const store = new Vuex.Store({});
+const todoStorage = {
+  fetch() {
+    return JSON.parse(localStorage.getItem("newTodoItem") || "[]");
+  },
+};
+
+export const store = new Vuex.Store({
+  state: {
+    todoItems: todoStorage.fetch(),
+  },
+  
+});
